@@ -1,0 +1,45 @@
+
+<ab-header></ab-header>
+<ion-content>
+  <ion-list> 
+    <ion-list-header>Pending Requests</ion-list-header>
+    
+    <ion-card *ngFor="let b of [1,2,3,4]">
+           <ion-card-header>
+        <ion-row>
+          <ion-label>
+            ref87asE23
+          </ion-label>
+          <ion-label>
+            <ion-icon name="cash"></ion-icon>
+            560
+          </ion-label>
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row>
+          <div>
+              <ion-icon name="calendar"></ion-icon>
+              <span>Fri, 29 Jul</span><br/>
+              <span>Tue, 02 Aug</span>
+          </div>
+          <div>
+              <ion-icon name="person"></ion-icon>
+              <span>2</span>
+          </div>
+        </ion-row>
+        <ion-row>
+          <div>
+              <ion-icon name="person"></ion-icon>
+              <span>1</span>
+          </div>
+          <div>
+              <ion-icon name="person"></ion-icon>
+              <span>3</span>
+          </div>
+        </ion-row>
+      </ion-card-content>
+      <button ion-button color="primary" class="button-block login-btn" large><span>Claim Booking</span></button>
+    </ion-card>
+  </ion-list>
+</ion-content>

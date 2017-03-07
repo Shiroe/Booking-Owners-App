@@ -1,0 +1,19 @@
+tabs-footer {
+    ion-tabs div.tabbar{
+        background-color: #333 !important;
+    }
+    ion-tabs div.tabbar a{
+        // background-color: #333 !important;
+        color: #fff !important;
+    }
+    ion-tabs div.tabbar a ion-icon{
+        // background-color: #333 !important;
+        color: #fff !important;
+    }
+    ion-tabs div.tabbar a[aria-selected=true]{
+        color: #00a699 !important;
+    }
+    ion-tabs div.tabbar a[aria-selected=true] ion-icon{
+        color: #00a699 !important;
+    }
+}

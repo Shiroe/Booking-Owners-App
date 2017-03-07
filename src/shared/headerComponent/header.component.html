@@ -1,0 +1,10 @@
+<ion-header text-center>
+    <ion-navbar text-center>
+        <ion-select class="dropdown" placeholder="Hotel" (ionChange)="dropChanged($event)">
+            <ion-option value="GR" selected="selected">Paros 1</ion-option>
+            <ion-option value="FR">Paros 2</ion-option>
+            <ion-option value="US">Mykonos 1</ion-option>
+            <ion-option value="logout" (click)="logout()">Logout</ion-option>
+        </ion-select>
+    </ion-navbar>
+</ion-header>
