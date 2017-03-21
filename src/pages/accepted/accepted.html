@@ -1,45 +1,40 @@
 
-<ab-header></ab-header>
+<ab-header (hotelChanged)="activeChanged($event)"></ab-header> 
 <ion-content> 
-  <ion-list>
-    <ion-list-header>Accepted Bookings</ion-list-header>
-    
-    <ion-card *ngFor="let b of [1,2,3,4]">
+  <ion-list *ngIf="bookings">    
+    <ion-card *ngFor="let b of bookings">
       <ion-card-header>
         <ion-row>
-          <ion-label>
-            ref87asE23
+          <ion-label width-60 text-left class="dates">
+            <span>From: {{ b.check_in_date | dateTransform | date:'mediumDate' }} </span><br/>
+            <span>To  : {{ b.check_out_date | dateTransform | date:'mediumDate' }} </span>
           </ion-label>
-          <ion-label>
-            <ion-icon name="cash"></ion-icon>
-            560
+          <ion-label width-40 text-right class="money">
+            <ion-icon name="cash" color="primary"></ion-icon>
+            {{ b.price }}
           </ion-label>
         </ion-row>
       </ion-card-header>
+      <div class="redline"></div>
       <ion-card-content>
         <ion-row>
-          <div>
-              <ion-icon name="calendar"></ion-icon>
-              <span>Fri, 29 Jul</span><br/>
-              <span>Tue, 02 Aug</span>
-          </div>
-          <div>
+          <ion-label text-left class="ref">
+              {{ b.references }}
+          </ion-label>
+          <ion-label text-center class="setup">
               <ion-icon name="person"></ion-icon>
-              <span>2</span>
-          </div>
-        </ion-row>
-        <ion-row>
-          <div>
-              <ion-icon name="person"></ion-icon>
-              <span>1</span>
-          </div>
-          <div>
-              <ion-icon name="person"></ion-icon>
-              <span>3</span>
-          </div>
-        </ion-row>
+              <span>{{ b.persons }}</span>
+          </ion-label>
+          <ion-label  text-right class="setup">
+              <i class="fa fa-bed" aria-hidden="true"></i>
+              <span>{{ b.double_room }}</span>
+          </ion-label>
+        </ion-row> 
       </ion-card-content>
-      <button ion-button color="primary" class="button-block login-btn" large><span>Claim Booking</span></button>
+      <button ion-button color="primary" class="button-block login-btn" large (click)="view(b)"><span>View Booking</span></button>
     </ion-card>
+  </ion-list>
+  <ion-list  *ngIf="bookings == null">
+    <ion-list-header><h2> There are no active or future bookings for this hotel currently.</h2> </ion-list-header>
   </ion-list>
 </ion-content>

@@ -1,10 +1,10 @@
 <ion-header text-center>
     <ion-navbar text-center>
-        <ion-select class="dropdown" placeholder="Hotel" (ionChange)="dropChanged($event)">
-            <ion-option value="GR" selected="selected">Paros 1</ion-option>
-            <ion-option value="FR">Paros 2</ion-option>
-            <ion-option value="US">Mykonos 1</ion-option>
-            <ion-option value="logout" (click)="logout()">Logout</ion-option>
+
+        <ion-select class="dropdown" placeholder="Hotel" [(ngModel)]="_active" (ionChange)="dropChanged($event)" >
+            <!--<ion-option *ngFor"let opt of _hotels" [value]="opt.id">{{opt.name}}</ion-option>-->
+            <ion-option *ngFor="let item of _hotels" [value]="item" selected="item == _active ? true : false">{{item.name}}</ion-option>
+            <!--<ion-option [value]="false">Logout</ion-option>-->
         </ion-select>
     </ion-navbar>
 </ion-header>

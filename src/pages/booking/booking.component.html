@@ -1,0 +1,58 @@
+<ion-content >
+    <div padding class="headerContainer">
+        <ion-row>
+            <h3 width-80>Your booking: </h3>
+            <ion-icon name="close" (click)="back()"></ion-icon>
+        </ion-row>
+    </div>
+    <div padding class="detailsContainer">
+        <ion-label class="redlinedivider"></ion-label>
+        <ion-row>
+            <ion-label class="left" width-50>Name</ion-label>
+            <ion-label class="right" width-50>{{booking.first_name}}</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-label class="left" width-50>Email</ion-label>
+            <ion-label class="right" width-50>{{booking.email}}</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-label class="left" width-50>Check-in</ion-label>
+            <ion-label class="right" width-50>{{ booking.check_in_date | dateTransform | date:'mediumDate' }}</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-label class="left" width-50>Check-out</ion-label>
+            <ion-label class="right" width-50>{{ booking.check_out_date | dateTransform | date:'mediumDate' }}</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-label class="left" width-50>Guests</ion-label>
+            <ion-label class="right" width-50>{{ booking.persons }}</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-label class="left" width-50>Rooms</ion-label>
+            <ion-label class="right" width-50>{{ booking.double_room }}</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-label class="left" width-50>Nights</ion-label>
+            <ion-label class="right" width-50>{{ [booking.check_out_date, booking.check_in_date] | dateDiff }}</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-label class="left" width-50>Total Cost</ion-label>
+            <ion-label class="right" width-50>{{ booking.price | currency: 'EUR': true}}</ion-label>
+        </ion-row>
+        <ion-row>
+            <ion-label class="left" width-50>Commission</ion-label>
+            <ion-label class="right" width-50>{{ booking.price * 0.3 | currency: 'EUR': true}}</ion-label>
+        </ion-row>
+        <ion-label class="redlinedivider"></ion-label>
+        <div class="headerContainer">
+            <ion-row>
+                <ion-label class="left" width-50>You get</ion-label>
+                <ion-label class="right" width-50>{{ (booking.price - (booking.price * 0.3)) | currency: 'EUR': true}}</ion-label>
+            </ion-row>
+        </div>
+
+        <div class="bottomSectionBtn">
+            <button ion-button color="primary" class="button-block login-btn" large  (click)="back()"><ion-label>Back</ion-label></button>
+        </div>
+    </div>
+</ion-content>
