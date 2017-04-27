@@ -6,12 +6,12 @@
       <ion-card-header>
         <ion-row>
           <ion-label width-60 text-left class="dates">
-            <span>From: {{ 03052017 | date }}</span><br/>
-            <span>To: {{ 03052017 | date }}</span>
+            <span>From: {{ b.check_in_date | dateTransform }}</span><br/>
+            <span>To: {{ b.check_out_date | dateTransform }}</span>
           </ion-label>
           <ion-label width-40 text-right class="money">
-            <ion-icon name="cash" color="primary"></ion-icon>
-            760
+            <!--<ion-icon name="cash" color="primary"></ion-icon>-->
+            {{b.price}}€
           </ion-label>
         </ion-row>
       </ion-card-header>
@@ -19,15 +19,15 @@
       <ion-card-content>
         <ion-row>
           <ion-label text-left class="ref">
-              ref777777
+              {{ b.references }}
           </ion-label>
           <ion-label text-center class="setup">
               <ion-icon name="person"></ion-icon>
-              <span>4</span>
+              <span>{{ b.persons }}</span>
           </ion-label>
           <ion-label  text-right class="setup">
               <i class="fa fa-bed" aria-hidden="true"></i>
-              <span>2</span>
+              <span>{{ b.double_room }}</span>
           </ion-label>
         </ion-row> 
       </ion-card-content>
@@ -35,11 +35,11 @@
     </ion-card>
   </ion-list>
   <ion-list  *ngIf="bookings == null">
-    <ion-list-header><span> There are no past bookings for this hotel currently.</span> </ion-list-header>
+    <ion-list-header><span> There are no past bookings for this hotel.</span> </ion-list-header>
   </ion-list>
-  <ion-card  *ngIf="bookings == null">
+  <!--<ion-card  *ngIf="bookings == null">
     <ion-item>
       <ion-label>History is empty at the moment.</ion-label>
     </ion-item>
-  </ion-card>
+  </ion-card>-->
 </ion-content>

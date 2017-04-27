@@ -6,6 +6,11 @@ import { TabsPage }       from '../pages/tabs/tabs';
 import { LoginPage }      from '../pages/login/login';
 import { StorageService } from '../shared/storage/storage.service';
 
+import {
+  Push,
+  PushToken
+} from '@ionic/cloud-angular';
+
 
 @Component({
   templateUrl: 'app.html',
@@ -14,6 +19,7 @@ import { StorageService } from '../shared/storage/storage.service';
 export class MyApp {
   rootPage: any; // = TabsPage;
   constructor(platform: Platform,
+             public push: Push,
              private modal: ModalController,
              private storage: StorageService) {
     platform.ready().then(() => {
@@ -22,6 +28,17 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
       // this.storage.init();
+
+      this.push.register().then((t: PushToken) => {
+        return this.push.saveToken(t);
+      }).then((t: PushToken) => {
+        console.log('Token saved:', t.token);
+      });
+ 
+      this.push.rx.notification()
+      .subscribe((msg) => {
+        console.log('I received awesome push: ' + msg);
+      });
 
       //if user already logged in and saved in storage then bypass login modal below
       // and just set rootPage = TabsPage;

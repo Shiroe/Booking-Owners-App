@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';
 export class StorageService {
 
     private hotels;
-    private active;
+    public active;
     private storage: Storage = new Storage;
     private sub;
 
@@ -67,6 +67,9 @@ export class StorageService {
 
     getActive(){
         return Observable.fromPromise( this.storage.get('active').then( d => { return d; }) );
+    }
+    getActiveOBJ(){
+        return this.active;
     }
 
     clear(){

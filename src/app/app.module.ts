@@ -20,6 +20,26 @@ import { DateTransformPipe }    from '../shared/pipes/dateTransform.pipe';
 import { DateDifferencePipe }    from '../shared/pipes/dateDiff.pipe';
 import { Base64 }               from '../shared/encoding/base64';
 
+import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
+
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '0d4aafde'
+  },
+  'push': {
+    'sender_id': '249311632410',
+    'pluginConfig': {
+      'ios': {
+        'badge': true,
+        'sound': true
+      },
+      'android': {
+        'iconColor': '#ff0000'
+      }
+    }
+  }
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -34,7 +54,8 @@ import { Base64 }               from '../shared/encoding/base64';
     DateDifferencePipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    CloudModule.forRoot(cloudSettings)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

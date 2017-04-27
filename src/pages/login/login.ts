@@ -10,11 +10,11 @@ import { StorageService } from '../../shared/storage/storage.service';
     providers: [LoaderComponent, StorageService]
 })
 export class LoginPage {
-  
-    username = 'ab@viralpassion.gr';
-    password;
 
-    constructor( 
+    username = 'ab@viralpassion.gr';
+    password = ')IJS(#X1eJLOF!ZjmyE15)4n';
+
+    constructor(
         private _nav: NavController,
         private _navParams: NavParams,
         private _viewCtrl: ViewController,
@@ -26,16 +26,17 @@ export class LoginPage {
     }
 
     login(){
-        //TODO CALL SERVICE 
-        this.password = ')IJS(#X1eJLOF!ZjmyE15)4n';
+        //TODO CALL SERVICE
+        // this.password = ')IJS(#X1eJLOF!ZjmyE15)4n';
         this._loader.presentDefault();
         this._api.login(this.username, this.password)
             .then( data => {
                 console.log('login response', data);
+                this._api.setLoggedInUserId(data.user_id);
                 this._viewCtrl.dismiss({logged: true, hotels: data.hotels});
                 this.storage.setHotels(data.hotels);
                 this.storage.setActive(data.hotels[0]);
-                setTimeout( ()=> { 
+                setTimeout( ()=> {
                     this._loader.dismissDefault();
                 }, 2000);
             }, error => {

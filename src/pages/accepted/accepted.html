@@ -6,12 +6,12 @@
       <ion-card-header>
         <ion-row>
           <ion-label width-60 text-left class="dates">
-            <span>From: {{ b.check_in_date | dateTransform | date:'mediumDate' }} </span><br/>
-            <span>To  : {{ b.check_out_date | dateTransform | date:'mediumDate' }} </span>
+            <span>From: {{ b.check_in_date | dateTransform }} </span><br/>
+            <span>To  : {{ b.check_out_date | dateTransform }} </span>
           </ion-label>
           <ion-label width-40 text-right class="money">
-            <ion-icon name="cash" color="primary"></ion-icon>
-            {{ b.price }}
+            <!--<ion-icon name="cash" color="primary"></ion-icon>-->
+            {{ b.price }}€
           </ion-label>
         </ion-row>
       </ion-card-header>
@@ -35,6 +35,6 @@
     </ion-card>
   </ion-list>
   <ion-list  *ngIf="bookings == null">
-    <ion-list-header><h2> There are no active or future bookings for this hotel currently.</h2> </ion-list-header>
+    <ion-list-header><h2> There are no active or future bookings for this hotel.</h2> </ion-list-header>
   </ion-list>
 </ion-content>

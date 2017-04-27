@@ -38,12 +38,22 @@ export class HistoryPage {
 
     activeChanged(ev){
         this.active = ev;
+		this._storage.setActive(ev);
         this.update();     
         // console.log('active Changed!', ev, ' : ' , this.active);
     }
 
     update(){
-        this._api.getPastRequestsByHotel(this.active.id)
+        this.sub = this._storage.getActive().subscribe( data => {
+            console.log('did retrieve:', data);
+            this.active = data;
+        }, error => {
+            console.log('error retrieving active ', error);            
+        });
+
+        
+
+        this._api.getPastRequestsByHotel(this.active.id.toString())
             .then( data => {
                 console.log('dataRequested',data);    
                 if(data && data.bookings){
@@ -60,5 +70,9 @@ export class HistoryPage {
     view(b){
         this._modalService.show(b);
     }
+
+    ionViewWillEnter(){
+		this.update();
+	};
 
 }

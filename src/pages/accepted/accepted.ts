@@ -48,6 +48,13 @@ export class AcceptedPage implements OnInit, OnDestroy{
     }
 
     update(){
+        this.sub = this._storage.getActive().subscribe( data => {
+            console.log('did retrieve:', data);
+            this.active = data;
+        }, error => {
+            console.log('error retrieving active ', error);            
+        });
+
         this._api.getAcceptedRequestsByHotel(this.active.id)
             .then( data => {
                 console.log('dataRequested',data);    
@@ -64,6 +71,7 @@ export class AcceptedPage implements OnInit, OnDestroy{
 
     activeChanged(ev){
         this.active = ev;
+		this._storage.setActive(ev);
         this.update();     
         // console.log('active Changed!', ev, ' : ' , this.active);
     }
@@ -75,5 +83,9 @@ export class AcceptedPage implements OnInit, OnDestroy{
     view(b){
         this._modalService.show(b);
     }
+    
+    ionViewWillEnter(){
+		this.update();
+	};
 
 }

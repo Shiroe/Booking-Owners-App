@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angu
 import { NavController } from 'ionic-angular';
 
 import { StorageService } from '../../shared/storage/storage.service';
+//import { HeaderComponentService }  from '../../shared/headerComponent/header.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
     constructor(
         private _nav: NavController,
+        //private _header: HeaderComponentService,
         private _storage: StorageService){
 
             this._storage.getHotels().then( data => {
@@ -60,8 +62,9 @@ export class HeaderComponent implements OnInit, OnDestroy{
             this.logout();
         }else{          
             this._active = this._hotels[this._hotels.map( (el) => el.id ).indexOf(ev.id)];
-            this.hotelChanged.emit(ev);
             this._storage.setActive(ev);
+          //  this._header.setActive(ev);
+            this.hotelChanged.emit(ev);
         }
     }
     

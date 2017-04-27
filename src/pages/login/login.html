@@ -2,10 +2,10 @@
     <div class="logo" pading><img src="assets/images/logo.png"></div>
     <div class="login-fields" padding>
         <ion-item class="login-field-item">
-            <ion-input aria-placeholder="Username" placeholder="Username"></ion-input>
+            <ion-input aria-placeholder="Username" [(ngModel)]="username" placeholder="Username"></ion-input>
         </ion-item>
         <ion-item class="login-field-item">
-            <ion-input aria-placeholder="Password" placeholder="Password"></ion-input>
+            <ion-input type="password" aria-placeholder="Password" [(ngModel)]="password" placeholder="Password"></ion-input>
         </ion-item>
     </div>
         <button ion-button color="primary" class="button-block login-btn" large (click)="login()"><span>Login</span></button>
