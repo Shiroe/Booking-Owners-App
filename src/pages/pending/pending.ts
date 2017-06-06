@@ -26,12 +26,12 @@ export class PendingPage {
 			private _storage: StorageService
 	  ) {
 
-			this.sub = this._storage.getActive().subscribe( data => {
+		this.sub = this._storage.getActive().subscribe( data => {
             console.log('did retrieve:', data);
             this.active = data;
             this.update();
         }, error => {
-            console.log('error retrieving active ', error);            
+            console.log('error retrieving active ', error);
         });
   }
 
@@ -52,24 +52,23 @@ export class PendingPage {
 		// 		this.active = data;
 		// 		this._loader.dismissDefault();
 		// }, error => {
-		// 		console.log('error retrieving active ', error);    
-		// 		this._loader.dismissDefault();        
+		// 		console.log('error retrieving active ', error);
+		// 		this._loader.dismissDefault();
 		// });
-		
+
 		this.sub = this._storage.getActive().subscribe( data => {
         	console.log('did retrieve:', data);
             this.active = this._storage.getActiveOBJ();
-            
+
 			this._api.getPendingRequestsByHotel( this.active.id.toString() )
 				.then(success => {
 					this._loader.dismissDefault();
-					if(success.avail_bookings){
+					//if(success.avail_bookings){
 						this.bookings = success.avail_bookings;
-					}
+					//}
 					console.log('avail',success);
 				}, error=> {});
 			});
-			this._loader.dismissDefault();
 		};
 
 	claimBooking(booking){
@@ -78,7 +77,7 @@ export class PendingPage {
 				console.log('did retrieve:', data);
 				this.active = data;
 		}, error => {
-				console.log('error retrieving active ', error);            
+				console.log('error retrieving active ', error);
 		});
 
 		this._api.claimBooking( booking, this.active.id.toString() )

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions }	from '@angular/http';
+import { Http, Headers, RequestOptions }  from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { Base64 } from '../encoding/base64';
@@ -8,99 +8,99 @@ import { Base64 } from '../encoding/base64';
 @Injectable()
 export class ServerService {
 
-	//TO DELETE THIS AND TOAST
-	private api: string = 'https://booking.vpsites.eu/wp-json/owner_app/v1';
-	// private api: string = 'https://demo.wp-api.org/wp-json/';
-	private headers = new Headers();
-	private hash: string;
-	private loggedInUserId;
+  //TO DELETE THIS AND TOAST
+  private api: string = 'https://mytravelusive.com/wp-json/owner_app/v1';
+  // private api: string = 'https://demo.wp-api.org/wp-json/';
+  private headers = new Headers();
+  private hash: string;
+  private loggedInUserId;
 
-	constructor(
-		public base64: Base64,
-		private _http: Http){
-		this.headers.append('Content-Type', 'application/json; charset=UTF-8');
+  constructor(
+    public base64: Base64,
+    private _http: Http){
+    this.headers.append('Content-Type', 'application/json; charset=UTF-8');
 
-		// this.headers.append('Access-Control-Allow-Origin:', '*');
-		// this.headers.append('crossDomain', 'true');
+    // this.headers.append('Access-Control-Allow-Origin:', '*');
+    // this.headers.append('crossDomain', 'true');
     }
 
-	// Caution with the headers.append on each function cuz if Authorization exists it will be added again the value
-	// eg 'Authorization' : 'Basic eos32df==' and you do another apped it will become
-	// 'Authorization' : 'Basic eos32df== Basic eos32df==' and request will fail.
-	// that's why only login appends 'authorization' header and saves it to hash
-	// creds = mail : pass
+  // Caution with the headers.append on each function cuz if Authorization exists it will be added again the value
+  // eg 'Authorization' : 'Basic eos32df==' and you do another apped it will become
+  // 'Authorization' : 'Basic eos32df== Basic eos32df==' and request will fail.
+  // that's why only login appends 'authorization' header and saves it to hash
+  // creds = mail : pass
 
-	// private creds: string;
+  // private creds: string;
 
-	logout(){
-		// TODO
-		// this.headers.delete('Authorization');
-		// and clear this.hash also any storage
-		// variable must be set to initial value.
-	}
+  logout(){
+    // TODO
+    // this.headers.delete('Authorization');
+    // and clear this.hash also any storage
+    // variable must be set to initial value.
+  }
 
-	setLoggedInUserId(id){
-		this.loggedInUserId = id;
-	}
+  setLoggedInUserId(id){
+    this.loggedInUserId = id;
+  }
 
-	login(email, password){
-		let data = {};
-		let creds = email + ':' + password;
-		this.hash = btoa('Basic '+ this.base64.encodeStringToString(creds));
+  login(email, password){
+    let data = {};
+    let creds = email + ':' + password;
+    this.hash = btoa('Basic '+ this.base64.encodeStringToString(creds));
 
-		// this.base64.encode(this.creds);
-		console.log('Encoded: ', this.hash, ' decoded: ', atob(this.hash));
+    // this.base64.encode(this.creds);
+    console.log('Encoded: ', this.hash, ' decoded: ', atob(this.hash));
 
-		this.headers.delete('Authorization');
-		this.headers.append('Authorization', atob(this.hash));
-		// this.headers.append('Authorization', 'Basic YWJAdmlyYWxwYXNzaW9uLmdyOilJSlMoI1gxZUpMT0YhWmpteUUxNSk0bg==');
-		let options = new RequestOptions({
-			headers: this.headers
-		});
+    this.headers.delete('Authorization');
+    this.headers.append('Authorization', atob(this.hash));
+    // this.headers.append('Authorization', 'Basic YWJAdmlyYWxwYXNzaW9uLmdyOilJSlMoI1gxZUpMT0YhWmpteUUxNSk0bg==');
+    let options = new RequestOptions({
+      headers: this.headers
+    });
 
-		return this._http.post(this.api + '/login', data, options).map( res => res.json()).toPromise();
-	}
+    return this._http.post(this.api + '/login', data, options).map( res => res.json()).toPromise();
+  }
 
 
-	getPendingRequestsByHotel(id: string){
-		let options = new RequestOptions({
-			headers: this.headers
-		});
+  getPendingRequestsByHotel(id: string){
+    let options = new RequestOptions({
+      headers: this.headers
+    });
 
-		return this._http.get(this.api + '/hotelbookings/' + id + '/available', options).map( res => res.json()).toPromise();
-	}
+    return this._http.get(this.api + '/hotelbookings/' + id + '/available', options).map( res => res.json()).toPromise();
+  }
 
-	getAcceptedRequestsByHotel(id: string){
+  getAcceptedRequestsByHotel(id: string){
 
-		let options = new RequestOptions({
-			headers: this.headers
-		});
+    let options = new RequestOptions({
+      headers: this.headers
+    });
 
-		// return this._http.post(this.api + '/hotelbookings/id/' + id + '/status/active', data, options).map( res => res.json()).toPromise();
-		return this._http.get(this.api + '/hotelbookings/' + id + '/status/active', options).map( res => res.json()).toPromise();
-	}
+    // return this._http.post(this.api + '/hotelbookings/id/' + id + '/status/active', data, options).map( res => res.json()).toPromise();
+    return this._http.get(this.api + '/hotelbookings/' + id + '/status/active', options).map( res => res.json()).toPromise();
+  }
 
-	getPastRequestsByHotel(id){
+  getPastRequestsByHotel(id){
 
-		let options = new RequestOptions({
-			headers: this.headers
-		});
+    let options = new RequestOptions({
+      headers: this.headers
+    });
 
-		return this._http.get(this.api + '/hotelbookings/' + id + '/status/inactive', options).map( res => res.json()).toPromise();
-	}
+    return this._http.get(this.api + '/hotelbookings/' + id + '/status/inactive', options).map( res => res.json()).toPromise();
+  }
 
-	claimBooking(booking, hotel_id){
-		let data = {
-			hotel_id: hotel_id,
-			booking_id: booking.id,
-			user_id: this.loggedInUserId,
-			reference: booking.references
-		};
+  claimBooking(booking, hotel_id){
+    let data = {
+      hotel_id: hotel_id,
+      booking_id: booking.id,
+      user_id: this.loggedInUserId,
+      reference: booking.references
+    };
 
-		let options = new RequestOptions({
-			headers: this.headers
-		});
+    let options = new RequestOptions({
+      headers: this.headers
+    });
 
-		return this._http.post(this.api + '/claimbooking', data, options).map( res => res.json()).toPromise();
-	}
+    return this._http.post(this.api + '/claimbooking', data, options).map( res => res.json()).toPromise();
+  }
 }
